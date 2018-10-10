@@ -3,16 +3,16 @@
     <button @click="$emit('search')">
       <i class="fa fa-search"></i>
     </button>
-    <SongList :song-list="songQueue"/>
+    <QueueItem v-for="song in songQueue" :key="song.id.videoId" :song="song"/>
   </div>
 </template>
 
 <script>
-import SongList from '@/components/SongList'
+import QueueItem from '@/components/QueueItem'
 
 export default {
   name: 'QueueView',
-  components: {SongList},
+  components: {QueueItem},
   props: {
     searching: Boolean,
     songQueue: Array

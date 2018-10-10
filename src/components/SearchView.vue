@@ -6,17 +6,17 @@
         <button type="reset"><i class="fa fa-close"></i></button>
       </form>
 
-      <SongList :song-list="searchResult"/>
+      <SearchItem v-for="song in searchResult" :key="song.id.videoId" :song="song"/>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-import SongList from '@/components/SongList'
+import SearchItem from '@/components/SearchItem'
 
 export default {
   name: 'SearchView',
-  components: {SongList},
+  components: {SearchItem},
   data () {
     return {
       searchWord: '',
@@ -46,6 +46,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
   #SearchView {
     /*float: right;*/
