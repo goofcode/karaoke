@@ -6,7 +6,8 @@
         <button type="reset"><i class="fa fa-close"></i></button>
       </form>
 
-      <SearchItem v-for="song in searchResult" :key="song.id.videoId" :song="song"/>
+      <SearchItem v-for="song in searchResult" :key="song.id.videoId" :song="song"
+                  @add="$emit('add', song)"/>
     </div>
 </template>
 

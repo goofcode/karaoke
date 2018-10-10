@@ -2,10 +2,16 @@
   <div id="sidebar">
     <QueueView v-if="!searching"
                :song-queue="songQueue"
-               @search="searching = true"></QueueView>
+               @search="searching = true"
+               @delete="songQueue.splice(songQueue.indexOf(arguments[0]), 1)"
+               @move-up="onMoveUp"
+               @move-down="onMoveDown">
+    </QueueView>
     <SearchView v-else
-                @result="onSearchResult"
-                @cancel="searching = false"></SearchView>
+                @add="songQueue.push(arguments[0])"
+                @cancel="searching = false">
+
+    </SearchView>
   </div>
 </template>
 
@@ -23,13 +29,21 @@ export default {
     }
   },
   methods: {
-    onSearchResult: function (song) {
-      this.songQueue.push(song)
-    }
-  },
-  watch: {
-    searching: function () {
-      // alert(this.searching)
+    // reason for splicing
+    // https://stackoverflow.com/questions/41857143/vue-js-swap-array-items
+    onMoveUp: function (song) {
+      let idx = this.songQueue.indexOf(song)
+      if (idx !== 0) {
+        this.songQueue.splice(idx - 1, 2, this.songQueue[idx], this.songQueue[idx - 1])
+      }
+      console.log(this.songQueue)
+    },
+    onMoveDown: function (song) {
+      let idx = this.songQueue.indexOf(song)
+      if (idx !== this.songQueue.length - 1) {
+        this.songQueue.splice(idx, 2, this.songQueue[idx + 1], this.songQueue[idx])
+      }
+      console.log(this.songQueue)
     }
   }
 }

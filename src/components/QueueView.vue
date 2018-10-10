@@ -3,7 +3,10 @@
     <button @click="$emit('search')">
       <i class="fa fa-search"></i>
     </button>
-    <QueueItem v-for="song in songQueue" :key="song.id.videoId" :song="song"/>
+    <QueueItem v-for="song in songQueue" :key="song.id.videoId" :song="song"
+               @delete="$emit('delete', song)"
+               @move-up="$emit('move-up', song)"
+               @move-down="$emit('move-down', song)"/>
   </div>
 </template>
 
