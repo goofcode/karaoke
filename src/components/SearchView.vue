@@ -6,8 +6,10 @@
         <button type="reset"><i class="fa fa-close"></i></button>
       </form>
 
-      <SearchItem v-for="song in searchResult" :key="song.id.videoId" :song="song"
-                  @add="$emit('add', song)"/>
+      <div class="search-result-container">
+        <SearchItem v-for="song in searchResult" :key="song.id.videoId" :song="song"
+                    @add="$emit('add', song)"/>
+      </div>
     </div>
 </template>
 
@@ -33,7 +35,8 @@ export default {
               key: this.$root.youtubeApiKey,
               q: '노래방' + this.searchWord,
               part: 'snippet',
-              type: 'video'
+              type: 'video',
+              maxResults: 15
             }
           })
           .then(response => {
@@ -55,29 +58,32 @@ export default {
     padding: 10px 0;
     margin: auto;
   }
-
-    button {
-        /*float: right;*/
-        width: 15%;
-        height: 5%;
-        padding: 10px 0;
-        background: #ddd;
-        font-size: 17px;
-        border: none;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background: #ccc;
-    }
-
-    input[type=text] {
-      width: 55%;
+  .search-result-container{
+    overflow: auto;
+    max-height: 100vh;
+  }
+  button {
+      /*float: right;*/
+      width: 15%;
       height: 5%;
-      padding: 10px;
-      margin: 0 3px;
+      padding: 10px 0;
+      background: #ddd;
       font-size: 17px;
       border: none;
-    }
+      cursor: pointer;
+  }
+
+  button:hover {
+      background: #ccc;
+  }
+
+  input[type=text] {
+    width: 55%;
+    height: 5%;
+    padding: 10px;
+    margin: 0 3px;
+    font-size: 17px;
+    border: none;
+  }
 
 </style>

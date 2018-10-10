@@ -1,7 +1,7 @@
 <template>
   <div id="karaoke">
-    <Sidebar class="split left"/>
-    <Stream class="split right"/>
+    <Stream class="split left"/>
+    <Sidebar class="split right"/>
   </div>
 </template>
 
@@ -28,14 +28,15 @@ export default {
     top: 0;
     overflow: hidden;
     /*z-index: 1;*/
+    background-color: black;
+    color: aliceblue;
   }
   .left{
-    width: 25%;
+    width: 75%;
     left: 0;
-    background-color: blanchedalmond;
   }
   .right{
-    width: 75%;
+    width: 25%;
     right: 0;
   }
 

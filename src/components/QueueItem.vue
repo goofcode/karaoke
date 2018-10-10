@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     title: function () {
-      return this.song.snippet.title.substring(0, 15) + '...'
+      return this.song.snippet.title.substring(0, 35) + '...'
     },
     thumbnailUrl: function () {
       return this.song.snippet.thumbnails.default.url
@@ -25,7 +25,6 @@ export default {
 </script>
 <style scoped>
   .QueueItem{
-    border: 1px black solid;
     overflow: hidden;
   }
   img{
