@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import youtubeJson from './googleAPI.json'
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -13,5 +15,6 @@ new Vue({
   components: { App },
   template: '<App/>',
   data: {
+    youtubeApiKey: youtubeJson.youtubeApiKey
   }
 })

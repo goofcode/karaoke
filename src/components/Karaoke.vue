@@ -30,12 +30,12 @@ export default {
     /*z-index: 1;*/
   }
   .left{
-    width: 20%;
+    width: 25%;
     left: 0;
     background-color: blanchedalmond;
   }
   .right{
-    width: 80%;
+    width: 75%;
     right: 0;
   }
 
