@@ -8,9 +8,8 @@
                @move-down="onMoveDown">
     </QueueView>
     <SearchView v-else
-                @add="songQueue.push(arguments[0])"
+                @add="onAddSong"
                 @cancel="searching = false">
-
     </SearchView>
   </div>
 </template>
@@ -18,6 +17,7 @@
 <script>
 import QueueView from '@/components/QueueView'
 import SearchView from '@/components/SearchView'
+import { ytEventBus } from './YtEventBus'
 
 export default {
   name: 'Sidebar',
@@ -44,9 +44,31 @@ export default {
         this.songQueue.splice(idx, 2, this.songQueue[idx + 1], this.songQueue[idx])
       }
       console.log(this.songQueue)
+    },
+    onAddSong: function (song) {
+      this.songQueue.push(song)
+      console.log(this.songQueue)
+      if (this.songQueue.length === 1) {
+        console.log('emit: new-song')
+        ytEventBus.$emit('new-song')
+      }
+    },
+    popNextSongId: function () {
+      let song = this.songQueue.shift()
+      return song.id.videoId
     }
+  },
+  created: function () {
+    ytEventBus.$on('next-song', () => {
+      if (this.songQueue.length) {
+        ytEventBus.$emit('play-song', this.popNextSongId())
+      } else {
+        console.log('no song to play')
+      }
+    })
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
